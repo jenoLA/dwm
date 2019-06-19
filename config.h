@@ -20,7 +20,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\ufc58", "\ue5fe" /*"\uf0ca", "\uf1b6", "\uf26f"*/ };
+static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\ufc58", "\ue5fe", "\uf0ca", "\ue615", "\uf04b" };
+// steam icon \uf1b6
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -124,4 +125,10 @@ static Button buttons[] = {
 //  { ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
+	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
+	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkTagBar,            0,              Button1,        view,           {0} },
+	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
+	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
+	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
