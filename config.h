@@ -112,7 +112,7 @@ static Key keys[] = {
     /* my sound and others modifications(not all) */ 
     { Mod1Mask,                     XK_m,      spawn,         SHCMD("/usr/bin/music.sh") },
     { Mod1Mask,                     XK_Insert, spawn,         SHCMD("/usr/bin/screenshot.sh") }, // still testing this part
-    { Mod1Mask,                     XK_Lock,   spawn,         {.v = slock } },
+    { Mod1Mask,                     XK_Caps_Lock,   spawn,         {.v = slock } },
 };
 
 /* button definitions */
@@ -124,3 +124,4 @@ static Button buttons[] = {
 //  { ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
+};
