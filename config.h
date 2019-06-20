@@ -41,11 +41,13 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
+#include "layouts.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "\ufa73",      tile },    /* first entry is default */
-	{ "\uf168",      NULL },    /* no layout function means floating behavior */
-	{ "\ufad7",      monocle }, // \uf0db for grid in the future
+	{ "[]=",      tile },    /* first entry is default */
+	{ "\uf168",   NULL },    /* no layout function means floating behavior */
+	{ "\ufad7",   monocle }, // \uf0db for grid in the future
+    { "\uf009",   grid },    // grid mode f00a      
 };
 
 /* key definitions */
@@ -93,6 +95,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} }, // floating
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, // monocle
+	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} }, // grid
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
