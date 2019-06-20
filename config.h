@@ -20,8 +20,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\uf7ca", "\ue5fe", "\uf0ca", "\ue615", "\uf04b" };
-// steam icon \uf1b6                                                  ("\ufc58" was)
+static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\uf7ca", "\ue5fe", /* "\uf0ca", "\uf30c", "\uf212" not needed right now*/ };
+// steam icon \uf1b6
 // f8a1 f8a4 f8a7 f8aa f8ad f8b0 f8b3 f8b6 f8b9 f8bc  0 1 2 3 4 5 6 7 8 9 in unicode
 // fa1a time on | fa1d time off | f462 settings(plans for audio)
 
@@ -31,7 +31,6 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 3,       0,           -1 },
     { "Telegram", NULL,       NULL,       1 << 2,       0,           -1 },
     { "URxvt",    NULL,       NULL,       0,            1,           -1 },
@@ -44,9 +43,9 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "\ufa73",      tile },    /* first entry is default */
+	{ "\uf168",      NULL },    /* no layout function means floating behavior */
+	{ "\ufad7",      monocle }, // \uf0db for grid in the future
 };
 
 /* key definitions */
