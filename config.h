@@ -111,6 +111,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY,                       XK_q,      quit,          {0} },
+	{ MODKEY,                       XK_r,      quit,          {.i = 1} }, // gonna restart dwm
     /* my sound and others modifications(not all) */ 
     { Mod1Mask,                     XK_m,      spawn,         SHCMD("/usr/bin/music.sh") },
     { Mod1Mask,                     XK_Insert, spawn,         SHCMD("/usr/bin/screenshot.sh") }, // still testing this part
