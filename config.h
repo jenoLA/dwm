@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 10;       /* gaps between windows  */
+static const unsigned int gappx     = 15;       /* gaps between windows  */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -20,8 +20,10 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\ufc58", "\ue5fe", "\uf0ca", "\ue615", "\uf04b" };
-// steam icon \uf1b6
+static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\uf7ca", "\ue5fe", "\uf0ca", "\ue615", "\uf04b" };
+// steam icon \uf1b6                                                  ("\ufc58" was)
+// f8a1 f8a4 f8a7 f8aa f8ad f8b0 f8b3 f8b6 f8b9 f8bc  0 1 2 3 4 5 6 7 8 9 in unicode
+// fa1a time on | fa1d time off | f462 settings(plans for audio)
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -122,7 +124,6 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-//  { ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
