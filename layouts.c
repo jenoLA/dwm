@@ -1,29 +1,42 @@
 void
-grid(Monitor *m)
+horizgrid(Monitor *m)
 {
-    unsigned int i, n, cx, cy, cw, ch, aw, ah, cols, rows;
+    unsigned int n, i;
     Client *c;
-    for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next))
-        n++;
+    // count windows
+    for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next) , n++);
 
-    /* grid dimensions */
-    for(rows = 0; rows <= n/2; rows++)
-        if (rows * rows >= n)
-            break;
+    if (n == 0)
+        return;
 
-    cols = (rows && (rows - 1) * rows >= n) ? rows - 1 : rows;
-    
-    /* windows geoms (cell height/width) */
-    ch = m->wh / (rows ? rows : 1);
-    cw = m->ww / (cols ? cols : 1);
-    for(i = 0, c = nexttiled(m->clients); c; c= nexttiled(c->next))
+    else if (n == 1)
+    { //just fill the whole screen
+        c = nexttiled(m->clients);
+        resize(c, m->wx, m->wy, m->ww - (2 * c->bw), m->wh - (2*c->bw), False);
+    }
+    else if (n == 2)
+    { //split vertically
+        
+        int w = m->ww / 2;
+        c = nexttiled(m->clients); //4th
+        resize(c, m->wx, m->wy, w - (2*c->bw), m->wh - (2*c->bw), False);
+        c = nexttiled(c->next);
+        resize(c, m->wx + w, m->wy, w + (2*c->bw), m->wh - (2*c->bw), False);
+    }
+    else
     {
-        cx = m->wx + (i / rows) * cw;
-        cy = m->wy + (i % rows) * ch;
-        /* adjust height/width of last row/column's windows */
-        ah = ((i + 1) % rows == 0) ? m->ww - cw * cols : 0;
-        aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols : 0;
-        resize(c, cx, cy, cw - 2 * c->bw + aw, ch -2 * c->bw + ah, False);
-        i++;
+        int ntop = n/2;
+        int nbottom = n - ntop;
+        for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+        {
+            if (i < ntop)
+                resize(c, m->wx + i * m->ww / ntop, m->wy,
+                        m->ww / ntop - (2*c->bw), m->wh / 2 - (2*c->bw), False);
+
+            else
+                resize(c, m->wx + (i - ntop) * m->ww / nbottom, m->wy + m->wh / 2,
+                        m->ww / nbottom - (2*c->bw), m->wh / 2 - (2*c->bw), False);
+
+        }
     }
 }

@@ -6,7 +6,7 @@ static const unsigned int gappx     = 15;       /* gaps between windows  */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "-*-notosans nerd fonts-*-*-*-*-*-*-*-*-*-*-*-*-*:size=11" };
+static const char *fonts[]          = { "-*-notosans nerd fonts-*-*-*-*-*-*-*-*-*-*-*-*-*:size=12" };
 //static const char dmenufont[]       = "monospace:size=10"; // using rofia script, no need to have this
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -47,7 +47,7 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "\uf168",   NULL },    /* no layout function means floating behavior */
 	{ "\ufad7",   monocle }, // \uf0db for grid in the future
-    { "\uf009",   grid },    // grid mode f00a      
+    { "\uf009",   horizgrid },    // grid mode f00a      
 };
 
 /* key definitions */
