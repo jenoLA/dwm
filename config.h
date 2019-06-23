@@ -46,8 +46,8 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "\uf168",   NULL },    /* no layout function means floating behavior */
-	{ "\ufad7",   monocle }, // \uf0db for grid in the future
-    { "\uf009",   horizgrid },    // grid mode f00a      
+	{ "\ufad7",   monocle },
+    { "##",       horizgrid },
 };
 
 /* key definitions */
@@ -118,7 +118,7 @@ static Key keys[] = {
     /* my sound and others modifications(not all) */ 
     { Mod1Mask,                     XK_m,      spawn,         SHCMD("/usr/bin/music.sh") },
     { Mod1Mask,                     XK_Insert, spawn,         SHCMD("/usr/bin/screenshot.sh") }, // still testing this part
-    { Mod1Mask,                     XK_Caps_Lock,   spawn,         {.v = slock } },
+    { Mod1Mask,                     XK_Caps_Lock,   spawn,    {.v = slock } },
 };
 
 /* button definitions */
