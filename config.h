@@ -20,7 +20,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\uf7ca", "\uf212", "\ue5fe",/* "\uf0ca", "\uf30c" not needed right now*/ };
+static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\uf7ca", "\uf212", "\ue5fe", "\uf0ca", "\uf30c"};
 // steam icon \uf1b6
 // f8a1 f8a4 f8a7 f8aa f8ad f8b0 f8b3 f8b6 f8b9 f8bc  0 1 2 3 4 5 6 7 8 9 in unicode
 // fa1a time on | fa1d time off | f462 settings(plans for audio)
@@ -33,7 +33,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",  NULL,       NULL,       1 << 3,       0,           -1 },
     { "Telegram", NULL,       NULL,       1 << 2,       0,           -1 },
-    { "URxvt",    NULL,       NULL,       1 << 4,       1,           -1 },
+    { "URxvt",    NULL,       NULL,       0,       1,           -1 },
 };
 
 /* layout(s) */
