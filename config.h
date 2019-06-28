@@ -33,7 +33,8 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",  NULL,       NULL,       1 << 3,       0,           -1 },
     { "Telegram", NULL,       NULL,       1 << 2,       0,           -1 },
-    { "URxvt",    NULL,       NULL,       0,       1,           -1 },
+    { "URxvt",    NULL,       NULL,       0,            1,           -1 },
+    { "Anki",     NULL,       NULL,       1 << 5,       0,           -1 },
 };
 
 /* layout(s) */
@@ -67,17 +68,19 @@ static const Layout layouts[] = {
 static const char *roficmd[]  = { "rofia",   NULL }; // using a script to spawn rofi with desired args
 static const char *termcmd[]  = { "st",      NULL };
 static const char *firefox[]  = { "firefox", NULL };
-static const char *telegram[] = { "telegram-desktop", NULL };
+static const char *anki[]     = { "anki",    NULL };
 static const char *URdraw[]   = { "urdraw",  NULL }; // script to draw urxvt
-static const char *slock[]    = { "slock",   NULL};
+static const char *slock[]    = { "slock",   NULL };
+static const char *telegram[] = { "telegram-desktop", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = roficmd } },
+	{ MODKEY,                       XK_d,      spawn,          {.v = roficmd  } },
 	{ Mod1Mask,                     XK_b,      spawn,          {.v = firefox  } },
-	{ Mod1Mask,                     XK_t,      spawn,          {.v = telegram  } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ Mod1Mask,                     XK_Return, spawn,          {.v = URdraw } },
+	{ Mod1Mask,                     XK_t,      spawn,          {.v = telegram } },
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd  } },
+	{ Mod1Mask,                     XK_Return, spawn,          {.v = URdraw   } },
+	{ Mod1Mask,                     XK_a,      spawn,          {.v = anki     } },
     { MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
     { MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
     { MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0 } },
