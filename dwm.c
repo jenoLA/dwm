@@ -99,6 +99,7 @@ struct Client {
 };
 
 typedef struct {
+	int type;
 	unsigned int mod;
 	KeyCode keycode;
 	void (*func)(const Arg *);
@@ -246,20 +247,21 @@ static int lrpad;            /* sum of left and right padding for text */
 static int (*xerrorxlib)(Display *, XErrorEvent *);
 static unsigned int numlockmask = 0;
 static void (*handler[LASTEvent]) (XEvent *) = {
-	[ButtonPress] = buttonpress,
-	[ClientMessage] = clientmessage,
-	[ConfigureRequest] = configurerequest,
-	[ConfigureNotify] = configurenotify,
-	[DestroyNotify] = destroynotify,
-	[EnterNotify] = enternotify,
-	[Expose] = expose,
-	[FocusIn] = focusin,
-	[KeyPress] = keypress,
-	[MappingNotify] = mappingnotify,
-	[MapRequest] = maprequest,
-	[MotionNotify] = motionnotify,
-	[PropertyNotify] = propertynotify,
-	[UnmapNotify] = unmapnotify,
+	[ButtonPress]       = buttonpress,
+	[ClientMessage]     = clientmessage,
+	[ConfigureRequest]  = configurerequest,
+	[ConfigureNotify]   = configurenotify,
+	[DestroyNotify]     = destroynotify,
+	[EnterNotify]       = enternotify,
+	[Expose]            = expose,
+	[FocusIn]           = focusin,
+	[KeyPress]          = keypress,
+	[KeyRelease]        = keypress,
+	[MappingNotify]     = mappingnotify,
+	[MapRequest]        = maprequest,
+	[MotionNotify]      = motionnotify,
+	[PropertyNotify]    = propertynotify,
+	[UnmapNotify]       = unmapnotify,
 };
 static Atom wmatom[WMLast], netatom[NetLast];
 static int running = 1;
@@ -701,7 +703,6 @@ void
 drawbar(Monitor *m)
 {
 	int x, w, sw = 0;
-	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
@@ -724,7 +725,7 @@ drawbar(Monitor *m)
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (occ & 1 << i)
-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
+			drw_rect(drw, x + boxw, 0, w - (2*boxw+1), 1,
 				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
 				urg & 1 << i);
 		x += w;
@@ -736,7 +737,7 @@ drawbar(Monitor *m)
     if ((w = m->ww - sw - x) > bh) {
         drw_setscheme(drw, scheme[SchemeNorm]);
         drw_rect(drw, x, 0, w, bh, 1, 1);
-	}
+    }
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
 
@@ -988,6 +989,7 @@ keypress(XEvent *e)
 	ev = &e->xkey;
 	for (i = 0; i < LENGTH(keys); i++)
 		if (ev->keycode == keys[i].keycode
+		&& ev->type     == keys[1].type
 		&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
 		&& keys[i].func)
 			keys[i].func(&(keys[i].arg));

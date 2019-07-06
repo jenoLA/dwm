@@ -54,10 +54,10 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ KeyPress, MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ KeyPress, MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ KeyPress, MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ KeyPress, MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -75,39 +75,39 @@ static const char *telegram[] = { "telegram-desktop", NULL };
 
 static Key keys[] = {
 	/* modifier             key    function        argument              use "xev | grep key" to find out the keys */
-	{ MODKEY,               40,    spawn,          {.v = roficmd    } }, // d
-	{ Mod1Mask,             56,    spawn,          {.v = qutebrowser} }, // b
-	{ Mod1Mask,             28,    spawn,          {.v = telegram   } }, // t
-	{ MODKEY,               36,    spawn,          {.v = termcmd    } }, // return
-	{ Mod1Mask,             36,    spawn,          {.v = URdraw     } }, // return
-	{ Mod1Mask,             38,    spawn,          {.v = anki       } }, // a
-	{ Mod1Mask,             66,    spawn,          {.v = slock      } }, // caps_lock
-	{ MODKEY,               20,    setgaps,        {.i = -1 } },         // - gaps
-	{ MODKEY,               21,    setgaps,        {.i = 0  } },         // = reset gaps
-	{ MODKEY|ShiftMask,     21,    setgaps,        {.i = +1 } },         // + gaps
-	{ MODKEY,               44,    focusstack,     {.i = +1 } },         // j
-	{ MODKEY,               45,    focusstack,     {.i = -1 } },         // k
-	{ MODKEY,               31,    incnmaster,     {.i = +1 } },         // i
-	{ MODKEY,               19,    view,           {.ui = ~0} },         // 0
-	{ MODKEY|ShiftMask,     19,    tag,            {.ui = ~0} },         // 0
-	{ MODKEY,               59,    focusmon,       {.i = -1 } },         // comma
-	{ MODKEY,               60,    focusmon,       {.i = +1 } },         // period
-	{ MODKEY|ShiftMask,     59,    tagmon,         {.i = -1 } },         // comma
-	{ MODKEY|ShiftMask,     60,    tagmon,         {.i = +1 } },         // period
-	{ MODKEY,               40,    incnmaster,     {.i = -1 } },         // d
-	{ MODKEY,               43,    setmfact,       {.f = -0.05 } },      // h
-	{ MODKEY,               46,    setmfact,       {.f = +0.05 } },      // l
-	{ MODKEY,               56,    togglebar,      {0} },                // b
-	{ MODKEY,               36,    zoom,           {0} },                // Return
-	{ MODKEY,               23,    view,           {0} },                // Tab
-	{ MODKEY,               53,    killunsel,      {0} },                // x
-	{ Mod1Mask,             45,    killclient,     {0} },                // k
-	{ MODKEY,               65,    setlayout,      {0} },                // space
-	{ MODKEY|ShiftMask,     65,    togglefloating, {0} },                // space
-	{ MODKEY,               28,    setlayout,      {.v = &layouts[0]} }, // [T]ile
-	{ MODKEY,               41,    setlayout,      {.v = &layouts[1]} }, // [F]loating
-	{ MODKEY,               58,    setlayout,      {.v = &layouts[2]} }, // [M]onocle
-	{ MODKEY,               42,    setlayout,      {.v = &layouts[3]} }, // [G]rid
+	{ KeyPress, MODKEY,               40,    spawn,          {.v = roficmd    } }, // d
+	{ KeyPress, Mod1Mask,             56,    spawn,          {.v = qutebrowser} }, // b
+	{ KeyPress, Mod1Mask,             28,    spawn,          {.v = telegram   } }, // t
+	{ KeyPress, MODKEY,               36,    spawn,          {.v = termcmd    } }, // return
+	{ KeyPress, Mod1Mask,             36,    spawn,          {.v = URdraw     } }, // return
+	{ KeyPress, Mod1Mask,             38,    spawn,          {.v = anki       } }, // a
+	{ KeyPress, Mod1Mask,             66,    spawn,          {.v = slock      } }, // caps_lock
+	{ KeyPress, MODKEY,               20,    setgaps,        {.i = -1 } },         // - gaps
+	{ KeyPress, MODKEY,               21,    setgaps,        {.i = 0  } },         // = reset gaps
+	{ KeyPress, MODKEY|ShiftMask,     21,    setgaps,        {.i = +1 } },         // + gaps
+	{ KeyPress, MODKEY,               44,    focusstack,     {.i = +1 } },         // j
+	{ KeyPress, MODKEY,               45,    focusstack,     {.i = -1 } },         // k
+	{ KeyPress, MODKEY,               31,    incnmaster,     {.i = +1 } },         // i
+	{ KeyPress, MODKEY,               19,    view,           {.ui = ~0} },         // 0
+	{ KeyPress, MODKEY|ShiftMask,     19,    tag,            {.ui = ~0} },         // 0
+	{ KeyPress, MODKEY,               59,    focusmon,       {.i = -1 } },         // comma
+	{ KeyPress, MODKEY,               60,    focusmon,       {.i = +1 } },         // period
+	{ KeyPress, MODKEY|ShiftMask,     59,    tagmon,         {.i = -1 } },         // comma
+	{ KeyPress, MODKEY|ShiftMask,     60,    tagmon,         {.i = +1 } },         // period
+	{ KeyPress, MODKEY,               40,    incnmaster,     {.i = -1 } },         // d
+	{ KeyPress, MODKEY,               43,    setmfact,       {.f = -0.05 } },      // h
+	{ KeyPress, MODKEY,               46,    setmfact,       {.f = +0.05 } },      // l
+	{ KeyPress, MODKEY,               56,    togglebar,      {0} },                // b
+	{ KeyPress, MODKEY,               36,    zoom,           {0} },                // Return
+	{ KeyPress, MODKEY,               23,    view,           {0} },                // Tab
+	{ KeyPress, MODKEY,               53,    killunsel,      {0} },                // x
+	{ KeyPress, Mod1Mask,             45,    killclient,     {0} },                // k
+	{ KeyPress, MODKEY,               65,    setlayout,      {0} },                // space
+	{ KeyPress, MODKEY|ShiftMask,     65,    togglefloating, {0} },                // space
+	{ KeyPress, MODKEY,               28,    setlayout,      {.v = &layouts[0]} }, // [T]ile
+	{ KeyPress, MODKEY,               41,    setlayout,      {.v = &layouts[1]} }, // [F]loating
+	{ KeyPress, MODKEY,               58,    setlayout,      {.v = &layouts[2]} }, // [M]onocle
+	{ KeyPress, MODKEY,               42,    setlayout,      {.v = &layouts[3]} }, // [G]rid
 	TAGKEYS(                10,                    0)                    // 1
 	TAGKEYS(                11,                    1)                    // 2
 	TAGKEYS(                12,                    2)                    // 3
@@ -117,24 +117,24 @@ static Key keys[] = {
 	TAGKEYS(                16,                    6)                    // 7
 	TAGKEYS(                17,                    7)                    // 8
 	TAGKEYS(                18,                    8)                    // 9
-	{ MODKEY,               24,    quit,           {0} },                // q
-	{ MODKEY,               27,    quit,           {.i = 1} },           // gonna [R]estart dwm
+	{ KeyPress, MODKEY,               24,    quit,           {0} },                // q
+	{ KeyPress, MODKEY,               27,    quit,           {.i = 1} },           // gonna [R]estart dwm
    					
 					/* scripts and others modifications */
     	// audioCtrl set volume up/down 5% and mute/unmute 
-	{ Mod1Mask,             123,   spawn,         SHCMD("~/bin/audioCtrl 0")   }, // raise volume buttom
-	{ Mod1Mask,             122,   spawn,         SHCMD("~/bin/audioCtrl 1")   }, // lower volume buttom
-	{ Mod1Mask,             121,   spawn,         SHCMD("~/bin/audioCtrl 2")   }, // audio mute/unmute
+	{ KeyPress, Mod1Mask,             123,   spawn,         SHCMD("~/bin/audioCtrl 0")   }, // raise volume buttom
+	{ KeyPress, Mod1Mask,             122,   spawn,         SHCMD("~/bin/audioCtrl 1")   }, // lower volume buttom
+	{ KeyPress, Mod1Mask,             121,   spawn,         SHCMD("~/bin/audioCtrl 2")   }, // audio mute/unmute
 	//  musicCtrl controls mpd via mpc
-	{ Mod1Mask,             172,   spawn,         SHCMD("~/bin/musicCtrl 0")   }, // Play buttom
-	{ Mod1Mask,             173,   spawn,         SHCMD("~/bin/musicCtrl 2")   }, // previous buttom
-	{ Mod1Mask,             171,   spawn,         SHCMD("~/bin/musicCtrl 1")   }, // next buttom 
-	{ Mod1Mask,             58,    spawn,         SHCMD("~/bin/musicCtrl 3")   }, // m  notify music playing
+	{ KeyPress, Mod1Mask,             172,   spawn,         SHCMD("~/bin/musicCtrl 0")   }, // Play buttom
+	{ KeyPress, Mod1Mask,             173,   spawn,         SHCMD("~/bin/musicCtrl 2")   }, // previous buttom
+	{ KeyPress, Mod1Mask,             171,   spawn,         SHCMD("~/bin/musicCtrl 1")   }, // next buttom 
+	{ KeyPress, Mod1Mask,             58,    spawn,         SHCMD("~/bin/musicCtrl 3")   }, // m  notify music playing
 	// another nice things
-	{ Mod1Mask,             107,   spawn,         SHCMD("~/bin/screeny")  },             // print buttom
-	{ Mod1Mask,             27,    spawn,         SHCMD("~/bin/record" )  },             // r
-	{ Mod1Mask,             39,    spawn,         SHCMD("~/bin/stoprec")  },             // s
-	{ Mod1Mask,             29,    spawn,         SHCMD("~/bin/ytmp3 '($xclip -out)'")}, // y
+	{ KeyPress, Mod1Mask,             107,   spawn,         SHCMD("~/bin/screeny")  },             // print buttom
+	{ KeyPress, Mod1Mask,             27,    spawn,         SHCMD("~/bin/record" )  },             // r
+	{ KeyPress, Mod1Mask,             39,    spawn,         SHCMD("~/bin/stoprec")  },             // s
+	{ KeyPress, Mod1Mask,             29,    spawn,         SHCMD("~/bin/ytmp3 '($xclip -out)'")}, // y
 };
 
 /* button definitions */
