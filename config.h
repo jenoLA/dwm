@@ -31,10 +31,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Firefox",  NULL,       NULL,       1 << 3,       0,           -1 },
-    { "Telegram", NULL,       NULL,       1 << 2,       0,           -1 },
-    { "URxvt",    NULL,       NULL,       0,            1,           -1 },
-    { "Anki",     NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "qutebrowser",  NULL,   NULL,       1 << 3,       0,           -1 },
+	{ "Telegram", NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "URxvt",    NULL,       NULL,       0,            1,           -1 },
+	{ "Anki",     NULL,       NULL,       1 << 5,       0,           -1 },
 };
 
 /* layout(s) */
@@ -48,7 +48,7 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "\uf168",   NULL },    /* no layout function means floating behavior */
 	{ "\ufad7",   monocle },
-    { "##",       horizgrid },
+	{ "##",       horizgrid },
 };
 
 /* key definitions */
@@ -67,70 +67,83 @@ static const Layout layouts[] = {
 //static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *roficmd[]  = { "rofia",   NULL }; // using a script to spawn rofi with desired args
 static const char *termcmd[]  = { "st",      NULL };
-static const char *firefox[]  = { "firefox", NULL };
 static const char *anki[]     = { "anki",    NULL };
 static const char *URdraw[]   = { "urdraw",  NULL }; // script to draw urxvt
 static const char *slock[]    = { "slock",   NULL };
+static const char *qutebrowser[]  = { "qutebrowser",  NULL };
 static const char *telegram[] = { "telegram-desktop", NULL };
 
 static Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = roficmd  } },
-	{ Mod1Mask,                     XK_b,      spawn,          {.v = firefox  } },
-	{ Mod1Mask,                     XK_t,      spawn,          {.v = telegram } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd  } },
-	{ Mod1Mask,                     XK_Return, spawn,          {.v = URdraw   } },
-	{ Mod1Mask,                     XK_a,      spawn,          {.v = anki     } },
-    { MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
-    { MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
-    { MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0 } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ControlMask,           XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ Mod1Mask,                     XK_k,      killclient,     {0} },
-    { MODKEY,                       XK_x,      killunsel,      {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} }, // floating
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, // monocle
-	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} }, // grid
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY,                       XK_q,      quit,          {0} },
-	{ MODKEY,                       XK_r,      quit,          {.i = 1} }, // gonna restart dwm
-    /* my sound and others modifications(not all) */ 
-    { Mod1Mask,                     XK_m,      spawn,         SHCMD("/usr/bin/music.sh") },
-    { Mod1Mask,                     XK_Insert, spawn,         SHCMD("/usr/bin/screenshot.sh") }, // still testing this part
-    { Mod1Mask,                     XK_Caps_Lock,   spawn,    {.v = slock } },
+	/* modifier             key    function        argument              use "xev | grep key" to find out the keys */
+	{ MODKEY,               40,    spawn,          {.v = roficmd    } }, // d
+	{ Mod1Mask,             56,    spawn,          {.v = qutebrowser} }, // b
+	{ Mod1Mask,             28,    spawn,          {.v = telegram   } }, // t
+	{ MODKEY,               36,    spawn,          {.v = termcmd    } }, // return
+	{ Mod1Mask,             36,    spawn,          {.v = URdraw     } }, // return
+	{ Mod1Mask,             38,    spawn,          {.v = anki       } }, // a
+	{ Mod1Mask,             66,    spawn,          {.v = slock      } }, // caps_lock
+	{ MODKEY,               20,    setgaps,        {.i = -1 } },         // - gaps
+	{ MODKEY,               21,    setgaps,        {.i = 0  } },         // = reset gaps
+	{ MODKEY|ShiftMask,     21,    setgaps,        {.i = +1 } },         // + gaps
+	{ MODKEY,               44,    focusstack,     {.i = +1 } },         // j
+	{ MODKEY,               45,    focusstack,     {.i = -1 } },         // k
+	{ MODKEY,               31,    incnmaster,     {.i = +1 } },         // i
+	{ MODKEY,               19,    view,           {.ui = ~0} },         // 0
+	{ MODKEY|ShiftMask,     19,    tag,            {.ui = ~0} },         // 0
+	{ MODKEY,               59,    focusmon,       {.i = -1 } },         // comma
+	{ MODKEY,               60,    focusmon,       {.i = +1 } },         // period
+	{ MODKEY|ShiftMask,     59,    tagmon,         {.i = -1 } },         // comma
+	{ MODKEY|ShiftMask,     60,    tagmon,         {.i = +1 } },         // period
+	{ MODKEY,               40,    incnmaster,     {.i = -1 } },         // d
+	{ MODKEY,               43,    setmfact,       {.f = -0.05 } },      // h
+	{ MODKEY,               46,    setmfact,       {.f = +0.05 } },      // l
+	{ MODKEY,               56,    togglebar,      {0} },                // b
+	{ MODKEY,               36,    zoom,           {0} },                // Return
+	{ MODKEY,               23,    view,           {0} },                // Tab
+	{ MODKEY,               53,    killunsel,      {0} },                // x
+	{ Mod1Mask,             45,    killclient,     {0} },                // k
+	{ MODKEY,               65,    setlayout,      {0} },                // space
+	{ MODKEY|ShiftMask,     65,    togglefloating, {0} },                // space
+	{ MODKEY,               28,    setlayout,      {.v = &layouts[0]} }, // [T]ile
+	{ MODKEY,               41,    setlayout,      {.v = &layouts[1]} }, // [F]loating
+	{ MODKEY,               58,    setlayout,      {.v = &layouts[2]} }, // [M]onocle
+	{ MODKEY,               42,    setlayout,      {.v = &layouts[3]} }, // [G]rid
+	TAGKEYS(                10,                    0)                    // 1
+	TAGKEYS(                11,                    1)                    // 2
+	TAGKEYS(                12,                    2)                    // 3
+	TAGKEYS(                13,                    3)                    // 4
+	TAGKEYS(                14,                    4)                    // 5
+	TAGKEYS(                15,                    5)                    // 6
+	TAGKEYS(                16,                    6)                    // 7
+	TAGKEYS(                17,                    7)                    // 8
+	TAGKEYS(                18,                    8)                    // 9
+	{ MODKEY,               24,    quit,           {0} },                // q
+	{ MODKEY,               27,    quit,           {.i = 1} },           // gonna [R]estart dwm
+   					
+					/* scripts and others modifications */
+    	// audioCtrl set volume up/down 5% and mute/unmute 
+	{ Mod1Mask,             123,   spawn,         SHCMD("~/bin/audioCtrl 0")   }, // raise volume buttom
+	{ Mod1Mask,             122,   spawn,         SHCMD("~/bin/audioCtrl 1")   }, // lower volume buttom
+	{ Mod1Mask,             121,   spawn,         SHCMD("~/bin/audioCtrl 2")   }, // audio mute/unmute
+	//  musicCtrl controls mpd via mpc
+	{ Mod1Mask,             172,   spawn,         SHCMD("~/bin/musicCtrl 0")   }, // Play buttom
+	{ Mod1Mask,             173,   spawn,         SHCMD("~/bin/musicCtrl 2")   }, // previous buttom
+	{ Mod1Mask,             171,   spawn,         SHCMD("~/bin/musicCtrl 1")   }, // next buttom 
+	{ Mod1Mask,             58,    spawn,         SHCMD("~/bin/musicCtrl 3")   }, // m  notify music playing
+	// another nice things
+	{ Mod1Mask,             107,   spawn,         SHCMD("~/bin/screeny")  },             // print buttom
+	{ Mod1Mask,             27,    spawn,         SHCMD("~/bin/record" )  },             // r
+	{ Mod1Mask,             39,    spawn,         SHCMD("~/bin/stoprec")  },             // s
+	{ Mod1Mask,             29,    spawn,         SHCMD("~/bin/ytmp3 '($xclip -out)'")}, // y
 };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
