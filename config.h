@@ -32,9 +32,10 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "qutebrowser",  NULL,   NULL,       1 << 3,       0,           -1 },
-	{ "Telegram", NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "URxvt",    NULL,       NULL,       0,            1,           -1 },
-	{ "Anki",     NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "Telegram",     NULL,   NULL,       1 << 2,       0,           -1 },
+	{ "URxvt",        NULL,   NULL,       0,            1,           -1 },
+	{ "Anki",         NULL,   NULL,       1 << 5,       0,           -1 },
+	{ "mpv",          NULL,   NULL,       1 << 4,       0,           -1 },
 };
 
 /* layout(s) */
