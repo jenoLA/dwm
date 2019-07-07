@@ -20,7 +20,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\uf7ca", "\uf212", "\ue5fe", "\uf0ca", "\uf30c"};
+static const char *tags[] = { "\uf120", "\uf121", "\uf1d8", "\uf269", "\uf7ca", "\uf212", "\ue5fe", "\uf0ca", "\ue615"};
 // steam icon \uf1b6
 // f8a1 f8a4 f8a7 f8aa f8ad f8b0 f8b3 f8b6 f8b9 f8bc  0 1 2 3 4 5 6 7 8 9 in unicode
 // fa1a time on | fa1d time off | f462 settings(plans for audio)
